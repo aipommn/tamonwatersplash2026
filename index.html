@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tamon Water Splash 2026</title>
+  <meta name="description"
+    content="多聞ウォータースプラッシュ2026の公式サイト。スプラッシュバトル・タスケ・ナイトプール＆ミニゲームを楽しめる水あそびイベント。参加前に必ずルールと注意事項をご確認ください。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ===================== MOBILE NAV ===================== -->
+  <nav class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="ナビゲーション">
+    <button class="mobile-nav-close" id="navClose" aria-label="閉じる">&#10005;</button>
+    <a href="#activities" data-color="splash" onclick="closeNav()">アクティビティ</a>
+    <a href="#splash" data-color="splash" onclick="closeNav()">スプラッシュバトル</a>
+    <a href="#cautions" data-color="caution" onclick="closeNav()">持参する水鉄砲の注意事項</a>
+    <a href="#tasuke" data-color="tasuke" onclick="closeNav()">タスケ</a>
+    <a href="#minigame" data-color="mini" onclick="closeNav()">ナイトプール・ミニゲーム</a>
+    <a href="#overall-cautions" data-color="caution" onclick="closeNav()">来校の注意事項</a>
+    <a href="#contact" data-color="contact" onclick="closeNav()">参加・お問い合わせ</a>
+  </nav>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="site-header" id="siteHeader" role="banner">
+    <a href="#" class="header-logo" aria-label="トップへ戻る">TAMON WATER SPLASH</a>
+    <nav aria-label="メインナビゲーション">
+      <ul class="header-nav">
+        <li><a href="#activities">アクティビティ</a></li>
+        <li><a href="#splash" data-color="splash">スプラッシュバトル</a></li>
+        <li><a href="#cautions" data-color="caution" onclick="closeNav()">持参する水鉄砲の注意事項</a></li>
+        <li><a href="#tasuke" data-color="tasuke">タスケ</a></li>
+        <li><a href="#minigame" data-color="mini">ナイトプール・ミニゲーム</a></li>
+        <li><a href="#overall-cautions" data-color="caution">来校の注意事項</a></li>
+        <li><a href="#contact" data-color="contact">参加・お問い合わせ</a></li>
+      </ul>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ===================== BGM PLAYER ===================== -->
+  <!-- 常時表示の音符FABボタン -->
+  <button class="bgm-fab" id="bgmFab" aria-label="BGMプレイヤーを開く" aria-expanded="false">
+    <span class="bgm-fab-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path d="M9 18V5l12-2v13" />
+        <circle cx="6" cy="18" r="3" />
+        <circle cx="18" cy="16" r="3" />
+      </svg>
+    </span>
+  </button>
+
+  <!-- 折りたたみパネル（FABの左横に展開） -->
+  <div class="bgm-panel" id="bgmPanel" role="region" aria-label="BGMプレイヤー">
+    <div class="bgm-top-row">
+      <button class="bgm-btn" id="bgmBtn" aria-pressed="false" aria-label="BGMをONにする">
+        <span class="bgm-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3" />
+          </svg>
+        </span>
+        <span class="bgm-label" id="bgmLabel">BGM OFF</span>
+      </button>
+      <div class="bgm-visualizer" id="bgmViz" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+    <div class="bgm-track-name" id="bgmTrackName" aria-live="polite">——</div>
+    <div class="bgm-volume-row">
+      <span class="bgm-vol-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+        </svg>
+      </span>
+      <input class="bgm-volume" id="bgmVolume" type="range" min="0" max="1" step="0.01" value="0.6" aria-label="音量">
+    </div>
+    <div class="bgm-suno-credit">Music: Made with Suno</div>
+    <audio id="bgmAudio" preload="none"></audio>
+  </div>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" aria-labelledby="heroTitle">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <span class="hero-badge">2026 SUMMER EVENT — 池尻・三宿・代沢地区</span>
+      <p class="hero-organizer">2026年度 多門小子ども行事委員会</p>
+      <h1 class="hero-title" id="heroTitle">
+        <span class="yellow">TAMON</span>
+        <span class="cyan">WATER SPLASH</span>
+        <span class="pink">2026</span>
+      </h1>
+      <p class="hero-subtitle-ja">納涼水あそび祭</p>
+
+      <div class="hero-event-info">
+        <div class="hero-event-date">
+          <span class="event-date-main">6<span class="slash">/</span>27</span>
+          <span class="event-date-sub">土曜日</span>
+        </div>
+        <div class="hero-event-detail">
+          <div class="event-detail-row">
+            <svg class="d-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+            多聞小学校の校庭
+          </div>
+          <div class="event-detail-row">
+            <svg class="d-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+            13:00〜15:00
+          </div>
+          <div class="event-detail-row free-badge">参加無料（事前申込優先）<br>定員600名</div>
+        </div>
+      </div>
+
+      <div class="hero-rain-banner" role="alert">
+        <svg class="rain-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="16" y1="13" x2="16" y2="21" />
+          <line x1="8" y1="13" x2="8" y2="21" />
+          <line x1="12" y1="15" x2="12" y2="23" />
+          <path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25" />
+        </svg>
+        <div>
+          <strong>雨天順延</strong>
+          <span>延期の場合：7月12日（日）10:00〜12:00</span><br>
+          開催可否については、前日および当日の発表をもって判断いたします。中止または順延となる場合は、本ページにてお知らせいたしますので、ご来場前に必ずご確認ください。
+        </div>
+      </div>
+
+      <div class="hero-games" role="list">
+        <a href="#splash" class="hero-game-tag splash" role="listitem">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z" />
+            <path d="M7 13s.5 1 2.5 1 3.5-2 5.5-2 2.5 1 2.5 1" />
+          </svg>
+          スプラッシュバトル
+        </a>
+        <a href="#tasuke" class="hero-game-tag tasuke" role="listitem">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M3 12h18M3 6h18M3 18h18" />
+          </svg>
+          タスケ
+        </a>
+        <a href="#minigame" class="hero-game-tag mini" role="listitem">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polygon
+              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+          </svg>
+          ナイトプール・ミニゲーム
+        </a>
+      </div>
+
+      <div class="hero-cta">
+        <a href="#entry" class="btn btn-primary">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" />
+            <rect x="14" y="3" width="7" height="7" />
+            <rect x="3" y="14" width="7" height="7" />
+            <path d="M14 17h3v3M14 14h7v3" />
+          </svg>
+          参加エントリーはこちら
+        </a>
+        <a href="#cautions" class="btn btn-secondary">注意事項を確認する</a>
+      </div>
+
+      <p class="hero-subsidy">この活動は、令和8年度（※）世田谷区外遊び普及啓発事業の補助を受けています。</p>
+    </div>
+    <div class="scroll-hint" aria-hidden="true">
+      <div class="line"></div>
+      <span>SCROLL</span>
+    </div>
+  </section>
+
+  <div class="cut" aria-hidden="true"></div>
+
+  <!-- ===================== ACTIVITIES OVERVIEW ===================== -->
+  <section class="section activities" id="activities" aria-labelledby="actTitle">
+    <div class="section-inner">
+      <p class="sec-eyebrow reveal">ACTIVITIES</p>
+      <h2 class="sec-title reveal" id="actTitle">3つの<span style="color:var(--c-mini);">アクティビティ</span></h2>
+      <p class="sec-lead reveal">
+        今年のイベントは3つのコーナーを用意しています。
+        各アクティビティには専用のルールがあります。参加前にご確認ください。
+      </p>
+
+      <ul class="act-grid">
+        <li class="act-card reveal" data-game="splash">
+          <span class="act-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M12 2c0 5-4 8-4 12a4 4 0 0 0 8 0c0-4-4-7-4-12z" />
+              <path d="M6 14c-1.5 0-3 1-3 3s1.5 3 3 3" />
+              <path d="M18 14c1.5 0 3 1 3 3s-1.5 3-3 3" />
+            </svg>
+          </span>
+          <span class="act-num">GAME 01</span>
+          <h3 class="act-name">スプラッシュバトル（小学生対象）</h3>
+          <p class="act-desc">仲間と協力して勝利をつかめ！
+            3分間のスプラッシュバトルでポイントを競い合い、相手チームを上回れば勝利。びしょ濡れ覚悟の熱い戦いに挑戦しよう！
+
+            <br> ※低学年・高学年でコートを分けて開催します。
+          </p>
+          <a href="#splash" class="act-link">詳しく見る →</a>
+        </li>
+        <li class="act-card reveal" data-game="tasuke" style="transition-delay:0.1s">
+          <span class="act-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M17 11V3" />
+              <path d="M7 21v-8" />
+              <polyline points="3 7 7 3 11 7" />
+              <polyline points="13 17 17 21 21 17" />
+              <line x1="7" y1="13" x2="17" y2="11" />
+            </svg>
+          </span>
+          <span class="act-num">GAME 02</span>
+          <h3 class="act-name">タスケ</h3>
+          <p class="act-desc">さまざまな障害物が待ち受ける個人参加型チャレンジレース！
+            コース内に捕らわれたコタモンキーたちを救出しながら、ゴールを目指して駆け抜けよう。
+
+            タイムはランキング表に掲載。最速タイムを目指して挑戦しよう！</p>
+          <a href="#tasuke" class="act-link">詳しく見る →</a>
+        </li>
+        <li class="act-card reveal" data-game="mini" style="transition-delay:0.2s">
+          <span class="act-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+          </span>
+          <span class="act-num">GAME 03</span>
+          <h3 class="act-name">ナイトプール・ミニゲーム</h3>
+          <p class="act-desc">ライトやサイリウムで彩られたナイトプール風エリア。冷たい足湯でひと休みしたり、水風船・的当てなどのミニゲームも楽しめます。</p>
+          <a href="#minigame" class="act-link">詳しく見る →</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="cut rev" aria-hidden="true"></div>
+
+  <!-- ===================== GAME 01: スプラッシュバトル ===================== -->
+  <section class="game-section section" id="splash" aria-labelledby="splashTitle">
+    <div class="bg-num" aria-hidden="true">01</div>
+    <div class="section-inner">
+      <p class="sec-eyebrow reveal" style="color:var(--c-splash);">GAME 01</p>
+      <h2 class="sec-title reveal" id="splashTitle">スプラッシュバトル<br><span
+          style="font-size:0.55em; color:var(--muted);">SPLASH BATTLE</span></h2>
+      <p class="sec-lead reveal">
+        対象：小学生<br>
+        水鉄砲を使ったポイント制のチームバトルです。
+        コートは低学年エリア・高学年エリアに分かれて実施します。<br>
+        制限時間終了時に、合計得点の高いチームの勝利です。
+      </p>
+
+      <div class="media-slot reveal" style="--accent: var(--c-splash);" role="img" aria-label="スプラッシュバトル イベント画像">
+        <img src="images/colorsplash.png" alt="スプラッシュバトル イベント画像">
+      </div>
+
+      <h3 class="reveal"
+        style="font-size:clamp(1rem,3vw,1.1rem); font-weight:700; margin-bottom:0.75rem; color:var(--text);">参加前の準備</h3>
+      <ul class="prep-list reveal">
+        <li class="prep-item">
+          <span class="prep-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+              <line x1="8" y1="21" x2="16" y2="21" />
+              <line x1="12" y1="17" x2="12" y2="21" />
+            </svg>
+          </span>
+          <div class="prep-item-body">
+            <h4>タオルをご持参ください</h4>
+            <p>水あそびのあとは拭き取りが必要です。</p>
+          </div>
+        </li>
+        <li class="prep-item">
+          <span class="prep-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M8 6l4-4 4 4" />
+              <path d="M12 2v10.3" />
+              <path d="M4.5 15.5A7.5 7.5 0 0 0 12 20a7.5 7.5 0 0 0 7.5-4.5" />
+            </svg>
+          </span>
+          <div class="prep-item-body">
+            <h4>靴（スニーカー等）の着用必須</h4>
+            <p>水で滑って転倒する危険があります。コート内は必ずスニーカーなど動きやすい靴を着用してください。<br>サンダルは禁止です。</p>
+          </div>
+        </li>
+        <li class="prep-item">
+          <span class="prep-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
+            </svg>
+          </span>
+          <div class="prep-item-body">
+            <h4>顔や目を狙うことは禁止です。</h4>
+            <p>ゲーム中は相手チームの的やゴールに向けて水鉄砲を使用しますが、直接人に向けて水鉄砲で狙わないでください。<br>
+              参加者で必要な場合は、水泳用ゴーグルを着用してください。</p>
+          </div>
+        </li>
+      </ul>
+
+      <h3 class="reveal"
+        style="font-size:clamp(1rem,3vw,1.1rem); font-weight:700; margin:2.5rem 0 0.75rem; color:var(--text);">ゲームのルール
+      </h3>
+      <div class="rule-img-slot reveal">
+        <img src="images/wp-r.webp" alt="スプラッシュバトル ルール画像">
+      </div>
+      <ul class="rules-grid">
+        <li class="rule-card reveal">
+          <span class="rule-tag">RULE 01</span>
+          <div class="r-num" aria-hidden="true">01</div>
+          <h3>３分間のチームバトル！</h3>
+          <p>
+            制限時間は3分間です。<br>
+            フィールド内のポイ（的）や中央のやぐらに設置されたポイ（的）を破ったり、水鉄砲で相手チームのゴールに水を入れたりして得点を獲得します。<br>
+            制限時間終了時に、合計得点の高いチームが勝利となります。
+          </p>
+        </li>
+        <li class="rule-card reveal" style="transition-delay:0.08s">
+          <span class="rule-tag">RULE 02</span>
+          <div class="r-num" aria-hidden="true">02</div>
+          <h3>ポイントを集める！守る！</h3>
+          <p>
+            相手陣地の的（ポイ）を破壊して得点を獲得！<br>
+            中央やぐらの的は2点、さらに相手ゴールへ水を入れると最大4点の大量得点チャンス！<br>
+            コート内にはダンボールのシールドも配置。攻め続けるか、守備に回って仲間を支えるかはチーム次第。<br>
+            どのポイントを狙う？ 誰が守る？<br>
+            勝利への近道は、チームの作戦と連携にあり！
+          </p>
+        </li>
+        <li class="rule-card reveal" style="transition-delay:0.16s">
+          <span class="rule-tag">RULE 03</span>
+          <div class="r-num" aria-hidden="true">03</div>
+          <h3>安全に楽しくプレイ！</h3>
+          <p>
+            ゲームの開始・終了はスタッフの合図で行います。<br>
+            走る際は周囲に注意し、
+            スタッフの指示に従って安全に楽しみましょう。
+            なお、低学年コートでは安全のため走ることは禁止です。
+          </p>
+        </li>
+      </ul>
+
+      <div class="activity-caution reveal">
+        <div class="activity-caution-header">
+          <svg class="warn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+            <line x1="12" y1="9" x2="12" y2="13" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+          </svg>
+          <h3>スプラッシュバトル 注意事項</h3>
+        </div>
+        <ul class="activity-caution-list">
+          <li>コート内の制作物・配置物への故意による破壊行為は禁止です。破損が発生した場合、競技内容の変更や中断など、その後のゲーム運営に大きな影響が生じる可能性があります。ルールとマナーを守ってご参加ください。</li>
+          <li>
+            顔・目を狙って発射することは絶対に禁止です。事前にお子様へのご指導をお願いします。<br>なお、直接攻撃は禁止としてますが、競技中に水に濡れる可能性があります。参加中は水泳用ゴーグルの装着も推奨です（落とし物、忘れ物に出やすいのでご注意ください）
+          </li>
+          <li>人数制チームバトルです。スタッフ誘導以外でゲームエリア内への無断侵入は禁止です。</li>
+          <li>濡れた状態での休憩エリアに向かうなど校舎内への立ち入りはできませんので、体や衣服の水分を十分に拭き取ってからご利用ください。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CAUTIONS ===================== -->
+  <section class="section cautions" id="cautions" aria-labelledby="cautionTitle">
+    <div class="section-inner">
+      <p class="sec-eyebrow reveal" style="color:var(--warn);">IMPORTANT NOTICE</p>
+      <h2 class="sec-title reveal" id="cautionTitle">
+        持参する水鉄砲の<span style="color:var(--warn);">注意事項</span>
+      </h2>
+      <p class="sec-lead reveal">
+        「スプラッシュバトル」では水鉄砲の持ち込みの参加です。<br>
+        昨今、非常に威力が強く当たると痛みを伴う「高出力（電動式・加圧式など）の水鉄砲」が普及しております。<br>
+        怪我やトラブル防止のため、以下のルールを定めます。必ずご一読のうえご参加ください。
+      </p>
+
+      <div class="caution-alert reveal">
+        <svg class="caution-alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+          <line x1="12" y1="9" x2="12" y2="13" />
+          <line x1="12" y1="17" x2="12.01" y2="17" />
+        </svg>
+        <div>
+          <strong>以下の行為は禁止されています</strong>
+          <p>違反した場合はゲームへの参加を制限することがあります。事前に必ずお子様へのご説明をお願いします。</p>
+        </div>
+      </div>
+
+      <ol class="caution-list" aria-label="イベント全体注意事項一覧">
+        <li class="c-item reveal">
+          <div class="c-num" aria-hidden="true">01</div>
+          <div class="c-body">
+            <h3>高出力水鉄砲の持ち込み禁止</h3>
+            <p>目安として<strong style="color:var(--text);">飛距離が5メートルを超えるもの</strong>はご遠慮ください。電動式・加圧式などの高出力タイプは持ち込み禁止です。</p>
+            <span class="c-tag">飛距離 5m 超えは禁止</span>
+          </div>
+        </li>
+        <li class="c-item reveal" style="transition-delay:0.06s">
+          <div class="c-num" aria-hidden="true">02</div>
+          <div class="c-body">
+            <h3>顔・目への発射禁止</h3>
+            <p>絶対に人の顔や目を狙わないよう、<strong
+                style="color:var(--text);">事前にお子様へのご指導</strong>をお願いします。顔・目への発射は重大な怪我につながる危険があります。<br>
+              必要な方はイベント参加中は水泳用ゴーグルの装着も推奨です（落とし物、忘れ物に出やすいのでご注意ください）
+            </p>
+          </div>
+        </li>
+        <li class="c-item reveal" style="transition-delay:0.12s">
+          <div class="c-num" aria-hidden="true">03</div>
+          <div class="c-body">
+            <h3>周囲への配慮</h3>
+            <p>水あそびに関係のない一般の方や、<strong
+                style="color:var(--text);">スマートフォンなどの電子機器を持った方</strong>に水がかからないようご注意ください。周囲への安全確認を常に行ってください。</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="cut" aria-hidden="true"></div>
+
+  <!-- ===================== GAME 02: タスケ ===================== -->
+  <section class="game-section section" id="tasuke" aria-labelledby="tasukeTitle">
+    <div class="bg-num" aria-hidden="true">02</div>
+    <div class="section-inner">
+      <p class="sec-eyebrow reveal" style="color:var(--c-tasuke);">GAME 02</p>
+      <h2 class="sec-title reveal" id="tasukeTitle">タスケ<br><span
+          style="font-size:0.55em; color:var(--muted);">TASUKE</span></h2>
+      <p class="sec-lead reveal">
+        ある日、校内を歩いていたタモンキーたちが何者かにさらわれてしまった。<br><br>
+
+        未来創造局未来課から緊急要請が届いている。<br><br>
+
+        キミたちのミッションは、
+        障害物コースを突破しながら捕らわれたコタモンキーたちを救出し、
+        最後に待ち受けるラスボスを倒してタモンキーを助け出すことだ。
+      </p>
+
+      <div class="media-slot reveal" style="--accent: var(--c-tasuke);" role="img" aria-label="タスケ イベント画像">
+        <img src="images/tasuke.webp" alt="タスケ イベント画像">
+      </div>
+
+      <h3 class="reveal"
+        style="font-size:clamp(1rem,3vw,1.1rem); font-weight:700; margin-bottom:0.75rem; color:var(--text);">参加前の準備</h3>
+      <ul class="prep-list reveal">
+        <li class="prep-item">
+          <span class="prep-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+              <line x1="8" y1="21" x2="16" y2="21" />
+              <line x1="12" y1="17" x2="12" y2="21" />
+            </svg>
+          </span>
+          <div class="prep-item-body">
+            <h4>タオルをご持参ください</h4>
+            <p>水あそびのあとは拭き取りが必要です。</p>
+          </div>
+        </li>
+        <li class="prep-item">
+          <span class="prep-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M6 20v-2a6 6 0 0 1 12 0v2" />
+            </svg>
+          </span>
+          <div class="prep-item-body">
+            <h4>靴（スニーカー等）の着用必須</h4>
+            <p>水で滑って転倒する危険があります。コート内は必ずスニーカーなど動きやすい靴を着用してください。サンダルは禁止です。</p>
+          </div>
+        </li>
+        <li class="prep-item">
+          <span class="prep-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z" />
+              <path d="M7 13s.5 1 2.5 1 3.5-2 5.5-2 2.5 1 2.5 1" />
+            </svg>
+          </span>
+          <div class="prep-item-body">
+            <h4>水に濡れる場合があります</h4>
+            <p>一部コースに水を使った障害物があります。汚れてもよい服装でご参加ください。</p>
+          </div>
+        </li>
+      </ul>
+
+      <h3 class="reveal"
+        style="font-size:clamp(1rem,3vw,1.1rem); font-weight:700; margin:2.5rem 0 0.75rem; color:var(--text);">ゲームのルール
+      </h3>
+      <div class="rule-img-slot reveal">
+        <img src="https://placehold.co/900x400/0D1A2F/FF5E3A?text=RULE+IMAGE" alt="タスケ ルール画像">
+      </div>
+      <ul class="rules-grid">
+        <li class="rule-card reveal">
+          <span class="rule-tag">RULE 01</span>
+          <div class="r-num" aria-hidden="true">01</div>
+          <h3>障害物を突破して救出ミッション！</h3>
+          <p>
+            コース内には囚われた３匹のコタモンキーが待っています。
+            さまざまな障害物を乗り越えながら救出し、ゴールを目指しましょう。<br>ゴール時間を計測しランキングにいたします。
+          </p>
+        </li>
+
+        <li class="rule-card reveal" style="transition-delay:0.08s">
+          <span class="rule-tag">RULE 02</span>
+          <div class="r-num" aria-hidden="true">02</div>
+          <h3>ラスボスの難問を突破せよ！</h3>
+          <p>
+            ３匹のコタモンキーを救出したら最後の関門へ。
+            ラスボスから出される難問やミッションをクリアして、タモンキーを助け出そう！
+          </p>
+        </li>
+
+        <li class="rule-card reveal" style="transition-delay:0.16s">
+          <span class="rule-tag">RULE 03</span>
+          <div class="r-num" aria-hidden="true">03</div>
+          <h3>安全第一でチャレンジ！</h3>
+          <p>
+            障害物は無理をせず、自分のペースで挑戦しましょう。
+            危険と判断した場合はスタッフが競技を中断します。スタッフの指示には必ず従ってください。
+          </p>
+        </li>
+      </ul>
+
+      <div class="activity-caution reveal">
+        <div class="activity-caution-header">
+          <svg class="warn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+            <line x1="12" y1="9" x2="12" y2="13" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+          </svg>
+          <h3>タスケ 注意事項</h3>
+        </div>
+        <ul class="activity-caution-list">
+          <li>一部、水に濡れるアクティビティがあります。</li>
+          <li>障害物に乗る・登る際は、スタッフの指示に従い安全に行ってください。</li>
+          <li>体調不良を感じた場合は直ちにリタイアし、スタッフへ申し出てください。</li>
+          <li>濡れた状態での休憩エリアに向かうなど校舎内への立ち入りはできませんので、体や衣服の水分を十分に拭き取ってからご利用ください。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="cut rev" aria-hidden="true"></div>
+
+  <!-- ===================== GAME 03: ナイトプール・ミニゲーム ===================== -->
+  <section class="game-section section" id="minigame" aria-labelledby="miniTitle">
+    <div class="bg-num" aria-hidden="true">03</div>
+    <div class="section-inner">
+      <p class="sec-eyebrow reveal" style="color:var(--c-mini);">GAME 03</p>
+      <h2 class="sec-title reveal" id="miniTitle">ナイトプール<br><span style="font-size:0.55em; color:var(--muted);">&
+          ミニゲーム</span></h2>
+      <p class="sec-lead reveal">
+        ナイトプール風の足湯アイスバスでリラックス！<br>
+        そのほか、水風船や的当てなど、未就学児のお子さまから大人まで楽しめるミニゲームをたくさんご用意しています。<br>
+        ※一部のミニゲームは数に限りがあります（ヨーヨー釣りなどは先着順のため、なくなり次第終了）。
+      </p>
+
+      <div class="media-slot reveal" style="--accent: var(--c-mini);" role="img" aria-label="ナイトプール・ミニゲーム 画像">
+        <p class="media-slot-label">IMAGE / VIDEO<br>（ナイトプール・ミニゲームの画像をここに配置）</p>
+      </div>
+
+      <h3 class="reveal"
+        style="font-size:clamp(1rem,3vw,1.1rem); font-weight:700; margin-bottom:0.75rem; color:var(--text);">参加前の準備</h3>
+      <ul class="prep-list reveal">
+        <li class="prep-item">
+          <span class="prep-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+            </svg>
+          </span>
+          <div class="prep-item-body">
+            <h4>濡れてもよい服装がおすすめです</h4>
+            <p>水風船など、濡れる可能性のあるゲームもあります。気になる方はタオルや着替えをご用意ください。</p>
+          </div>
+        </li>
+
+        <li class="prep-item">
+          <span class="prep-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+          </span>
+          <div class="prep-item-body">
+            <h4>スタッフに声をかけてください</h4>
+            <p>各ゲームの受付はスタッフが担当します。参加したいゲームのブースへ直接お越しください。</p>
+          </div>
+        </li>
+
+        <li class="prep-item">
+          <span class="prep-item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+          </span>
+          <div class="prep-item-body">
+            <h4>ゆずり合ってご利用ください</h4>
+            <p>ナイトプールエリアやミニゲームは自由にご利用いただけます。混雑時は順番を守り、譲り合ってお楽しみください。</p>
+          </div>
+        </li>
+      </ul>
+
+      <h3 class="reveal"
+        style="font-size:clamp(1rem,3vw,1.1rem); font-weight:700; margin:2.5rem 0 0.75rem; color:var(--text);">参加のルール
+      </h3>
+      <!--div class="rule-img-slot reveal">
+        <img src="https://placehold.co/900x400/0D1A2F/FFD600?text=RULE+IMAGE" alt="ナイトプール・ミニゲーム ルール画像">
+      </div-->
+      <ul class="rules-grid">
+        <li class="rule-card reveal">
+          <span class="rule-tag">RULE 01</span>
+          <div class="r-num" aria-hidden="true">01</div>
+          <h3>順番を守って参加する</h3>
+          <p>順番待ちの列がある場合は、必ず並んでお待ちください。割り込みは禁止です。</p>
+        </li>
+        <li class="rule-card reveal" style="transition-delay:0.08s">
+          <span class="rule-tag">RULE 02</span>
+          <div class="r-num" aria-hidden="true">02</div>
+          <h3>道具を大切に扱う</h3>
+          <p>ゲームで使用する道具は丁寧に扱ってください。故意に破損させた場合は弁償をお願いする場合があります。</p>
+        </li>
+        <li class="rule-card reveal" style="transition-delay:0.16s">
+          <span class="rule-tag">RULE 03</span>
+          <div class="r-num" aria-hidden="true">03</div>
+          <h3>混雑時のご案内</h3>
+          <p>混雑状況により、一部コーナーでは利用時間や入場人数を制限する場合があります。スタッフの案内にご協力をお願いいたします。</p>
+        </li>
+      </ul>
+
+      <div class="activity-caution reveal">
+        <div class="activity-caution-header">
+          <svg class="warn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+            <line x1="12" y1="9" x2="12" y2="13" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+          </svg>
+          <h3>ナイトプール・ミニゲーム 注意事項</h3>
+        </div>
+        <ul class="activity-caution-list">
+          <li>未就学児の方もご参加いただけます。必ず保護者同伴でご利用ください。</li>
+          <li>一部のミニゲームは数に限りがあります（ヨーヨーなどは先着順のため、なくなり次第終了）。</li>
+          <li>混雑時は順番を守り、譲り合ってご利用ください。</li>
+          <li>ナイトプールエリアは照明を使用した演出を行います。足元に注意してお楽しみください。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="cut" aria-hidden="true"></div>
+
+  <!-- ===================== OVERALL EVENT CAUTIONS ===================== -->
+  <section class="section overall-cautions" id="overall-cautions" aria-labelledby="overallCautionTitle">
+    <div class="section-inner">
+      <p class="sec-eyebrow reveal" style="color:var(--neon-pink);">VISITOR GUIDELINES</p>
+      <h2 class="sec-title reveal" id="overallCautionTitle">来校にあたっての<span style="color:var(--neon-pink);">注意・同意事項</span>
+      </h2>
+      <p class="sec-lead reveal">ご参加いただく際は、以下の事項に同意のうえご参加ください。</p>
+
+      <ul class="participation-notes reveal">
+        <li>本イベントは先着600名での開催となります。定員に達した場合は受付を終了いたします。</li>
+
+        <li>スプラッシュバトルで使用する水鉄砲は各自ご持参ください。スプラッシュバトルでの貸出・販売はありません。</li>
+
+        <li>スプラッシュバトル、タスケでは全身が濡れる可能性があります。<br>
+          参加される方は濡れても良い服装・運動靴・タオルをご用意ください。サンダルでの参加はできません。</li>
+
+        <li>熱中症予防のため、各自水筒（飲み物）を必ずご持参ください。</li>
+
+        <li>ゲーム競技以外での、学校内敷地でで水鉄砲を人に向けて発射することは禁止です。</li>
+
+        <li>こまめな水分補給を行い、体調不良や気分が悪くなった場合は、すぐにスタッフへお声がけください。</li>
+
+        <li>参加される児童は、必ず保護者（代表者）のご同伴をお願いいたします。</li>
+
+        <li>当日はお着替え専用テントや更衣室のご用意はありません。</li>
+
+        <li>会場内に参加者・保護者向けの室内休憩所をご用意しております。<br>
+          <b>濡れた状態での休憩エリアに向かうなど校舎内への立ち入りはできませんので、体や衣服の水分を十分に拭き取ってからご利用ください。</b>
+        </li>
+
+        <li>学校内に駐車場・駐輪場はございません。ご来場の際は徒歩にてお越しください。<br>
+          また、三宿の森緑地をはじめとする近隣施設や周辺道路への駐車・駐輪は、近隣住民の皆さまのご迷惑となりますので固くお断りいたします。<br><br>
+          <strong>【重要】</strong><br>
+          駐車・駐輪に関するルール違反や近隣からの苦情が発生した場合、本イベントの継続開催が困難となる可能性があります。皆さまのご理解とご協力をお願いいたします。
+        </li>
+
+        <li>写真・動画撮影では他の参加者が映り込む場合は必ず許可を取ってください。無断での撮影・SNS投稿はお断りする場合があります。</li>
+
+        <li>会場内で発生したゴミは、各自でお持ち帰りいただきますようご協力をお願いいたします。</li>
+
+        <li>万一のケガや事故に備え、参加者を対象としたイベント保険（行事保険）に加入して運営いたします。</li>
+
+        <li>外遊び推進の啓発を目的として写真・動画撮影を行い、世田谷区および協賛企業の広報活動に使用させていただく場合があります。</li>
+
+        <li>特命チーム「未来創造局」のメンバー（小学6年生を中心とする有志の児童）と大人たちが協力して企画した手作りイベントです。安全管理上必要な場合を除き、イベント内容は予告なく変更となる場合があります。</li>
+      </ul>
+
+      <p class="subsidy-note reveal" syle="color:var(--white);"> ※ この活動は、令和8年度 世田谷区外遊び普及啓発事業の補助を受けています。</p>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer" role="contentinfo" id="contact">
+    <div class="footer-logo">TAMON WATER SPLASH 2026</div>
+    <div class="footer-games" aria-label="アクティビティ一覧">
+      <span class="s">スプラッシュバトル</span>
+      <span class="t">タスケ</span>
+      <span class="m">ナイトプール・ミニゲーム</span>
+    </div>
+    <nav class="footer-nav" aria-label="フッターナビゲーション">
+      <a href="#activities">アクティビティ</a>
+      <a href="#splash">スプラッシュバトル</a>
+      <a href="#tasuke">タスケ</a>
+      <a href="#minigame">ナイトプール・ミニゲーム</a>
+      <a href="#cautions">持参する水鉄砲の注意事項</a>
+      <a href="#overall-cautions">来校の注意事項</a>
+    </nav>
+
+    <div class="footer-contact" id="entry">
+      <div class="footer-contact-inner">
+        <div class="footer-qr">
+          <img src="https://placehold.co/160x160/0D1A2F/00C8FF?text=QR+CODE" alt="イベント参加QRコード" class="qr-img">
+          <p class="qr-label">参加申し込みQRコード</p>
+        </div>
+        <div class="footer-contact-info">
+          <h3 class="footer-contact-title">参加・お問い合わせ</h3>
+          <a href="https://example.com/entry" class="footer-entry-link" target="_blank" rel="noopener">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" y1="14" x2="21" y2="3" />
+            </svg>
+            イベント参加登録フォーム
+          </a>
+
+          <div class="footer-email-area">
+            <span class="footer-email-label">メールでのお問い合わせ</span>
+            <a href="mailto:tamon.kodomo.events@gmail.com" class="footer-email">tamon.kodomo.events@gmail.com</a>
+          </div>
+        </div>
+        <p><Small>※事前登録は必須ではありませんが、参加人数の把握のため、参加予定の方は事前登録にご協力をお願いいたします。</Small></p>
+      </div>
+    </div>
+
+    <p class="footer-copy">&copy; 2026 Tamon Water Splash. All rights reserved.</p>
+  </footer>
+
+  <!-- ===================== JS ===================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* Sticky header */
+      var header = document.getElementById('siteHeader');
+      window.addEventListener('scroll', function () {
+        header.classList.toggle('scrolled', window.scrollY > 50);
+      }, { passive: true });
+
+      /* Scroll reveal */
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.08 });
+      document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
+
+      /* Mobile nav */
+      var nav = document.getElementById('mobileNav');
+      var burger = document.getElementById('hamburger');
+
+      function openNav() {
+        nav.classList.add('open');
+        burger.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+
+      window.closeNav = function () {
+        nav.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      };
+
+      document.getElementById('navClose').addEventListener('click', closeNav);
+
+      burger.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (nav.classList.contains('open')) { closeNav(); } else { openNav(); }
+      });
+
+      nav.addEventListener('click', function (e) {
+        if (e.target === nav) closeNav();
+      });
+
+      /* ===================== BGM PLAYER ===================== */
+      var bgmAudio = document.getElementById('bgmAudio');
+      var bgmFab = document.getElementById('bgmFab');
+      var bgmPanel = document.getElementById('bgmPanel');
+      var bgmBtn = document.getElementById('bgmBtn');
+      var bgmLabel = document.getElementById('bgmLabel');
+      var bgmViz = document.getElementById('bgmViz');
+      var bgmTrackName = document.getElementById('bgmTrackName');
+      var bgmVolume = document.getElementById('bgmVolume');
+
+      var playlist = [
+        { src: 'audio/Tamon_Splash.mp3', title: 'Tamon Splash' },
+        { src: 'audio/Tamon Squid Sprint.mp3', title: 'Tamon Squid Sprint' },
+        { src: 'audio/Ika Yo Battle.mp3', title: 'Ika Yo Battle' }
+      ];
+      var currentIndex = -1;
+      var panelOpen = false;
+
+      /* パネル開閉 */
+      function togglePanel(forceOpen) {
+        panelOpen = (forceOpen !== undefined) ? forceOpen : !panelOpen;
+        bgmPanel.classList.toggle('open', panelOpen);
+        bgmFab.classList.toggle('open', panelOpen);
+        bgmFab.setAttribute('aria-expanded', panelOpen ? 'true' : 'false');
+        bgmFab.setAttribute('aria-label', panelOpen ? 'BGMプレイヤーを閉じる' : 'BGMプレイヤーを開く');
+      }
+
+      bgmFab.addEventListener('click', function (e) {
+        e.stopPropagation();
+        togglePanel();
+      });
+
+      /* パネル外クリックで閉じる */
+      document.addEventListener('click', function (e) {
+        if (panelOpen && !bgmPanel.contains(e.target) && e.target !== bgmFab) {
+          togglePanel(false);
+        }
+      });
+
+      /* ランダム次曲 */
+      function getNextIndex() {
+        var next;
+        do { next = Math.floor(Math.random() * playlist.length); }
+        while (playlist.length > 1 && next === currentIndex);
+        return next;
+      }
+
+      /* 再生アイコン切り替え */
+      var ICON_PLAY = '<polygon points="5 3 19 12 5 21 5 3"/>';
+      var ICON_PAUSE = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+
+      function setPlayingState(playing) {
+        bgmBtn.setAttribute('aria-pressed', playing ? 'true' : 'false');
+        bgmBtn.setAttribute('aria-label', playing ? 'BGMをOFFにする' : 'BGMをONにする');
+        bgmBtn.querySelector('svg').innerHTML = playing ? ICON_PAUSE : ICON_PLAY;
+        bgmLabel.textContent = playing ? 'BGM ON' : 'BGM OFF';
+        bgmViz.classList.toggle('active', playing);
+        bgmFab.classList.toggle('playing', playing);
+        if (!playing) bgmTrackName.textContent = '——';
+      }
+
+      function playTrack(index) {
+        currentIndex = index;
+        var track = playlist[index];
+        bgmAudio.src = track.src;
+        bgmAudio.volume = parseFloat(bgmVolume.value);
+        bgmAudio.play().catch(function () { setPlayingState(false); });
+        bgmTrackName.textContent = '▶ ' + track.title;
+        setPlayingState(true);
+      }
+
+      bgmAudio.addEventListener('ended', function () {
+        playTrack(getNextIndex());
+      });
+
+      /* 再生/停止ボタン */
+      bgmBtn.addEventListener('click', function () {
+        var isPlaying = bgmBtn.getAttribute('aria-pressed') === 'true';
+        if (isPlaying) {
+          bgmAudio.pause();
+          setPlayingState(false);
+        } else {
+          playTrack(getNextIndex());
+        }
+      });
+
+      /* 音量 */
+      bgmVolume.addEventListener('input', function () {
+        bgmAudio.volume = parseFloat(this.value);
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+          closeNav();
+          if (panelOpen) togglePanel(false);
+        }
+      });
+    })();
+  </script>
+</body>
+
+</html>
