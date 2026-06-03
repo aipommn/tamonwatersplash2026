@@ -329,7 +329,7 @@ ol {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(6, 12, 24, 0.97);
+  background: rgba(6, 12, 24, 0.90);
 }
 
 /* メッシュグラデーション（元のまま） */
