@@ -318,10 +318,22 @@ ol {
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: #060C18;
+  background-image: url('images/helo-bg.webp');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
 }
 
+/* 暗くするオーバーレイ */
 .hero-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 12, 24, 0.97);
+}
+
+/* メッシュグラデーション（元のまま） */
+.hero-bg::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -329,16 +341,6 @@ ol {
     linear-gradient(rgba(0, 200, 255, 0.04) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 200, 255, 0.04) 1px, transparent 1px);
   background-size: 52px 52px;
-}
-
-.hero-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 60% 45% at 20% 70%, rgba(0, 200, 255, 0.18) 0%, transparent 65%),
-    radial-gradient(ellipse 50% 40% at 80% 30%, rgba(0, 255, 176, 0.12) 0%, transparent 65%),
-    radial-gradient(ellipse 40% 35% at 55% 85%, rgba(255, 61, 140, 0.14) 0%, transparent 60%);
 }
 
 .hero-inner {
@@ -1532,12 +1534,10 @@ ol {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('images/tamoandkey.webp');
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-  opacity: 0.12;
-  filter: saturate(0.6);
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 100%, rgba(0, 200, 255, 0.18) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 60% at 85% 90%, rgba(0, 255, 176, 0.13) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 50% 110%, rgba(255, 61, 140, 0.12) 0%, transparent 55%);
   pointer-events: none;
   z-index: 0;
 }
