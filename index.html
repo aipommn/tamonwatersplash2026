@@ -268,11 +268,12 @@ l202 -1 3 -97z" />
   <!-- 常時表示の音符FABボタン -->
   <button class="bgm-fab" id="bgmFab" aria-label="BGMプレイヤーを開く" aria-expanded="false">
     <span class="bgm-fab-icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-        stroke-linejoin="round">
-        <path d="M9 18V5l12-2v13" />
-        <circle cx="6" cy="18" r="3" />
-        <circle cx="18" cy="16" r="3" />
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <polygon points="3,5 9,5 14,2 14,20 9,17 3,17" fill="none" stroke="#1aff9c" stroke-width="1.5"
+          stroke-linejoin="round" />
+        <path d="M17 6.5 Q20 11 17 15.5" stroke="#1aff9c" stroke-width="1.5" fill="none" stroke-linecap="round" />
+        <path d="M19.5 4 Q24 11 19.5 18" stroke="#1aff9c" stroke-width="1.3" fill="none" stroke-linecap="round"
+          opacity="0.4" />
       </svg>
     </span>
   </button>
@@ -287,7 +288,7 @@ l202 -1 3 -97z" />
             <polygon points="5 3 19 12 5 21 5 3" />
           </svg>
         </span>
-        <span class="bgm-label" id="bgmLabel">BGM OFF</span>
+        <span class="bgm-label" id="bgmLabel">BGM キク？</span>
       </button>
       <div class="bgm-visualizer" id="bgmViz" aria-hidden="true">
         <span></span><span></span><span></span><span></span>
@@ -305,6 +306,11 @@ l202 -1 3 -97z" />
       <input class="bgm-volume" id="bgmVolume" type="range" min="0" max="1" step="0.01" value="0.6" aria-label="音量">
     </div>
     <div class="bgm-suno-credit">Music: Made with Suno</div>
+    <div class="bgm-track-pills" id="bgmTrackPills" aria-label="曲を選択">
+      <button class="bgm-pill" data-index="0" aria-pressed="false">Tamon Splash</button>
+      <button class="bgm-pill" data-index="1" aria-pressed="false">Squid Sprint</button>
+      <button class="bgm-pill" data-index="2" aria-pressed="false">Ika Yo Battle</button>
+    </div>
     <audio id="bgmAudio" preload="none"></audio>
   </div>
 
@@ -1253,6 +1259,7 @@ l202 -1 3 -97z" />
       var bgmViz = document.getElementById('bgmViz');
       var bgmTrackName = document.getElementById('bgmTrackName');
       var bgmVolume = document.getElementById('bgmVolume');
+      var bgmPills = document.querySelectorAll('.bgm-pill');
 
       var playlist = [
         { src: 'audio/Tamon_Splash.mp3', title: 'Tamon Splash' },
@@ -1261,6 +1268,14 @@ l202 -1 3 -97z" />
       ];
       var currentIndex = -1;
       var panelOpen = false;
+
+      /* ピルのアクティブ状態を更新 */
+      function updatePills(index) {
+        bgmPills.forEach(function (pill, i) {
+          pill.setAttribute('aria-pressed', i === index ? 'true' : 'false');
+          pill.classList.toggle('active', i === index);
+        });
+      }
 
       /* パネル開閉 */
       function togglePanel(forceOpen) {
@@ -1299,10 +1314,13 @@ l202 -1 3 -97z" />
         bgmBtn.setAttribute('aria-pressed', playing ? 'true' : 'false');
         bgmBtn.setAttribute('aria-label', playing ? 'BGMをOFFにする' : 'BGMをONにする');
         bgmBtn.querySelector('svg').innerHTML = playing ? ICON_PAUSE : ICON_PLAY;
-        bgmLabel.textContent = playing ? 'BGM ON' : 'BGM OFF';
+        bgmLabel.textContent = playing ? 'BGM ON' : 'BGM キク？';
         bgmViz.classList.toggle('active', playing);
         bgmFab.classList.toggle('playing', playing);
-        if (!playing) bgmTrackName.textContent = '——';
+        if (!playing) {
+          bgmTrackName.textContent = '——';
+          updatePills(-1);
+        }
       }
 
       function playTrack(index) {
@@ -1313,6 +1331,7 @@ l202 -1 3 -97z" />
         bgmAudio.play().catch(function () { setPlayingState(false); });
         bgmTrackName.textContent = '▶ ' + track.title;
         setPlayingState(true);
+        updatePills(index);
       }
 
       bgmAudio.addEventListener('ended', function () {
@@ -1328,6 +1347,21 @@ l202 -1 3 -97z" />
         } else {
           playTrack(getNextIndex());
         }
+      });
+
+      /* 曲ピルクリックで選曲 */
+      bgmPills.forEach(function (pill) {
+        pill.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var idx = parseInt(pill.getAttribute('data-index'), 10);
+          if (idx === currentIndex && bgmBtn.getAttribute('aria-pressed') === 'true') {
+            /* 同じ曲をもう一度タップ → 停止 */
+            bgmAudio.pause();
+            setPlayingState(false);
+          } else {
+            playTrack(idx);
+          }
+        });
       });
 
       /* 音量 */

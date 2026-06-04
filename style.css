@@ -1310,9 +1310,8 @@ ol {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 18px;
-  height: 18px;
-  color: var(--c-splash);
+  width: 22px;
+  height: 22px;
   transition: color 0.3s;
 }
 
@@ -1481,6 +1480,47 @@ ol {
   color: rgba(255, 255, 255, 0.22);
   letter-spacing: 0.06em;
   line-height: 1;
+}
+
+/* 曲名ピル群 */
+.bgm-track-pills {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  margin-top: 0.1rem;
+}
+
+.bgm-pill {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  color: rgba(255, 255, 255, 0.38);
+  font-family: var(--fb);
+  font-size: 0.58rem;
+  letter-spacing: 0.04em;
+  padding: 0.22em 0.7em;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
+  white-space: nowrap;
+  line-height: 1.6;
+}
+
+.bgm-pill:hover {
+  background: rgba(0, 200, 255, 0.1);
+  border-color: rgba(0, 200, 255, 0.35);
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.bgm-pill.active,
+.bgm-pill[aria-pressed="true"] {
+  background: rgba(0, 255, 176, 0.1);
+  border-color: rgba(0, 255, 176, 0.45);
+  color: rgba(0, 255, 176, 0.9);
+  box-shadow: 0 0 6px rgba(0, 255, 176, 0.12);
 }
 
 .bgm-volume-row {
