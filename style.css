@@ -120,15 +120,31 @@ ol {
   backdrop-filter: blur(12px);
 }
 
+
 .header-logo {
-  font-family: var(--fd);
-  font-size: clamp(0.75rem, 2vw, 1rem);
-  letter-spacing: 0.06em;
-  color: #fff;
-  background: var(--c-splash);
-  padding: 0.2em 0.7em;
-  border-radius: var(--r);
-  line-height: 1.6;
+  display: flex;
+    font-family: var(--fd);
+      font-size: clamp(0.75rem, 2vw, 1rem);
+      letter-spacing: 0.06em;
+      color: #fff;
+  align-items: center;
+  gap: 10px;
+  /* ロゴと文字の間隔 */
+  text-decoration: none;
+}
+
+.logo-svg {
+  height: 32px;
+  /* ヘッダーの高さに合わせて調整してください */
+  width: auto;
+  display: block;
+}
+
+/* モバイル対応：必要に応じてサイズを微調整 */
+@media (max-width: 768px) {
+  .logo-svg {
+    height: 24px;
+  }
 }
 
 .header-nav {
@@ -353,14 +369,14 @@ ol {
 
 .hero-badge {
   display: inline-block;
-  font-family: var(--fd);
+  /* font-family: var(--fd); */
   font-size: 0.62rem;
   letter-spacing: 0.32em;
-  color: #060C18;
-  background: var(--accent);
+  color: #fff;
+  /* background: var(--accent); */
   padding: 0.4em 1.4em;
   margin-bottom: 1.4rem;
-  border-radius: var(--r);
+  /* border-radius: var(--r); */
   opacity: 0;
   animation: fadeUp 0.6s 0.3s var(--ease) forwards;
 }
@@ -574,6 +590,12 @@ ol {
   opacity: 0;
   animation: fadeUp 0.7s 1.25s var(--ease) forwards;
 }
+
+        @media (max-width: 768px) {
+          .hero-logo-svg {
+            height: 80px !important;
+          }
+        }
 
 .btn {
   display: inline-flex;
