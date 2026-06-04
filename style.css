@@ -1476,10 +1476,11 @@ ol {
 }
 
 .bgm-suno-credit {
-  font-size: 0.58rem;
-  color: rgba(255, 255, 255, 0.22);
-  letter-spacing: 0.06em;
-  line-height: 1;
+    font-size: 0.58rem;
+      color: rgba(255, 255, 255, 0.5);
+      letter-spacing: 0.06em;
+      line-height: 1;
+      text-align: right;
 }
 
 /* 曲名ピル群 */
