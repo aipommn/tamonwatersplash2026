@@ -26,8 +26,8 @@
     <a href="#splash" data-color="splash" onclick="closeNav()">スプラッシュバトル</a>
     <a href="#tasuke" data-color="tasuke" onclick="closeNav()">タスケ</a>
     <a href="#minigame" data-color="mini" onclick="closeNav()">ナイトプール・ミニゲーム</a>
-    <a href="#cautions" data-color="caution" onclick="closeNav()">持参する持ち物</a>
-    <a href="#overall-cautions" data-color="caution" onclick="closeNav()">来校の注意事項</a>
+    <a href="#cautions" data-color="caution" onclick="closeNav()">持ち物</a>
+    <a href="#overall-cautions" data-color="caution" onclick="closeNav()">注意事項</a>
     <a href="#contact" data-color="contact" onclick="closeNav()">参加・お問い合わせ</a>
   </nav>
 
@@ -254,8 +254,8 @@ l202 -1 3 -97z" />
         <li><a href="#splash" data-color="splash">スプラッシュバトル</a></li>
         <li><a href="#tasuke" data-color="tasuke">タスケ</a></li>
         <li><a href="#minigame" data-color="mini">ナイトプール・ミニゲーム</a></li>
-        <li><a href="#cautions" data-color="caution" onclick="closeNav()">持参する持ち物</a></li>
-        <li><a href="#overall-cautions" data-color="caution">来校の注意事項</a></li>
+        <li><a href="#cautions" data-color="caution" onclick="closeNav()">持ち物</a></li>
+        <li><a href="#overall-cautions" data-color="caution">注意事項</a></li>
         <li><a href="#contact" data-color="contact">参加・お問い合わせ</a></li>
       </ul>
     </nav>
@@ -559,13 +559,16 @@ l202 -1 3 -97z" />
             </svg>
             13:00〜15:00
           </div>
-          <div class="event-detail-row free-badge">参加無料（事前申込優先）</div>
-          <!-- 参加定員とカウンターのエリア -->
-          <div class="event-detail-row" style="text-align: center;">
-            <strong>参加児童約600名</strong>を予定
+          <!-- 参加無料と定員のエリア（強制的に改行させる設定を追加） -->
+          <div class="event-detail-row free-badge"
+            style="display: block !important; white-space: normal !important; text-align: center;">
+            <div style="margin-bottom: 5px;">参加無料（事前登録受付中）</div>
+            <div style="font-weight: bold;">参加児童約600名を予定</div>
+          </div>
 
-            <!-- シンプルなカウンター部分 -->
-            <div class="attendee-counter-simple" style="margin-top: 15px;">
+          <!-- カウンターのエリア -->
+          <div class="event-detail-row" style="display: block !important; text-align: center;">
+            <div class="attendee-counter-simple" style="margin-top: 10px;">
               <span class="attendee-label"
                 style="display: block; font-size: 14px; color: #fff; opacity: 0.9; margin-bottom: 5px;">現在のエントリー数</span>
               <div class="attendee-value"
@@ -577,21 +580,24 @@ l202 -1 3 -97z" />
 
           <script>
             async function updateCount() {
-              // Google Apps ScriptのURL
-              const url = "https://script.google.com/macros/s/AKfycbyapN670rI4lnT-zrbShMRlJzC079RQ05Ft4hvAP_pea_dS8tIAuhbON06HhsGjZ328/exec";
-
+              const url = "https://script.google.com/macros/s/AKfycbx2eVRdIc_4ONndRd6UD5XKSvWUP8dqN9sFOxCAsQLVoe5TxvG72UCmCqmD0z2hbTUe/exec";
               try {
                 const res = await fetch(url);
                 const data = await res.json();
                 document.getElementById('attendee-count').innerText = data.count;
               } catch (e) {
+                console.error("エラーが発生しました:", e);
                 document.getElementById('attendee-count').innerText = "0";
               }
             }
+
+            // ★ これを追加してください（ページ読み込み時に実行）
             updateCount();
-            // 30秒ごとに自動更新（必要に応じて調整してください）
+            // ★ ついでに30秒ごとに自動更新するようにしておくと便利です
             setInterval(updateCount, 30000);
           </script>
+
+
 
         </div>
       </div>
@@ -606,8 +612,9 @@ l202 -1 3 -97z" />
         </svg>
         <div>
           <strong>雨天順延</strong>
-          <span>延期の場合：7月4日（日）10:00〜12:00</span><br>
-          開催可否については、前日および当日の発表をもって判断いたします。中止または順延となる場合は、本ページにてお知らせいたしますので、ご来場前に必ずご確認ください。
+          <span>延期の場合：7/4（Sat）10:00〜</span><br>
+          開催可否については、前日および当日の発表をもって判断いたします。順延となる場合は、本ページにてお知らせいたしますので、ご来場前に必ずご確認ください。<br>
+          ※<small>順延となった場合でも、同日開催予定の第2部「防災イベント」は順延・中止の予定はありません。なお、第2部への参加には別途申込が必要です。詳細は防災イベントのチラシに記載の問い合わせ先または申込フォームをご確認ください。</small>
         </div>
       </div>
 
@@ -645,8 +652,8 @@ l202 -1 3 -97z" />
           </svg>
           参加エントリーはこちら
         </a>
-        <a href="#cautions" class="btn btn-secondary">持参する持ち物</a>
-        <a href="#overall-cautions" class="btn btn-secondary">来校の注意事項を確認する</a>
+        <a href="#cautions" class="btn btn-secondary">持ち物</a>
+        <a href="#overall-cautions" class="btn btn-secondary">注意事項を確認する</a>
       </div>
 
       <p class="hero-subsidy">この活動は、令和8年度（※）世田谷区外遊び普及啓発事業の補助を受けています。</p>
@@ -1143,18 +1150,30 @@ l202 -1 3 -97z" />
 
   <div class="cut" aria-hidden="true"></div>
 
+
   <!-- ===================== OVERALL EVENT CAUTIONS ===================== -->
   <section class="section overall-cautions" id="overall-cautions" aria-labelledby="overallCautionTitle">
     <div class="section-inner">
       <p class="sec-eyebrow reveal" style="color:var(--neon-pink);">EVENT GUIDELINES</p>
-      <h2 class="sec-title reveal" id="overallCautionTitle">来校にあたっての<span style="color:var(--neon-pink);">注意・同意事項</span>
+      <h2 class="sec-title reveal" id="overallCautionTitle">注意・同意<span style="color:var(--neon-pink);">事項</span>
       </h2>
-      <p class="sec-lead reveal">ご参加いただく際は、以下の事項に同意のうえご参加ください。</p>
+      <p class="sec-lead reveal">ご参加いただく際は、以下の参加登録・来校の注意事項に同意のうえご参加ください。</p>
 
+      <!-- 参加登録に関する重要ルール -->
+      <h3 style="margin-top: 2rem;">参加登録について</h3>
+      <ul class="participation-notes" style="margin-bottom: 0;">
+        <li><strong>お子様のみでの参加はできません。</li>
+        <li><strong>まとめて登録OK：</strong>ご兄弟やお友達など、一緒に来場されるお子様の分を代表の方がまとめて登録いただけます。</li>
+        <li>
+          <strong>人数の入力：</strong>現在の参加予定人数を正しくお知らせするため、、参加する<strong>お子様の合計人数</strong>と<strong>お名前</strong>の入力にご協力をお願いします。
+        </li>
+      </ul>
+
+      <!-- 参加登録に関する重要ルール -->
+      <h3 style="margin-top: 2rem;">来校について</h3>
       <ul class="participation-notes reveal">
         <li>参加される児童は、必ず保護者（代表者）のご同伴をお願いいたします。</li>
-
-        <li>本イベントは先着600名での開催となります。定員に達した場合は受付を終了いたします。</li>
+        <li>本イベントは参加児童600名を予定しております。安全な運営のため、参加状況によっては受付を終了する場合があります。</li>
 
         <li>学校内に駐車場・駐輪場はございません。ご来場の際は徒歩にてお越しください。<br>
           また、三宿の森緑地をはじめとする近隣施設や周辺道路への駐車・駐輪は、近隣住民の皆さまのご迷惑となりますので固くお断りいたします。<br>
@@ -1164,21 +1183,20 @@ l202 -1 3 -97z" />
 
         <li>当日はお着替え専用テントや更衣室のご用意はありません。</li>
 
-        <li>会場内に参加者・保護者向けの室内休憩所をご用意しております。<br>
-          <strong style="color:var(--text);">濡れた状態での休憩エリアに向かうなど校舎内への立ち入りはできませんので、体や衣服の水分を十分に拭き取ってからご利用ください。</strong>
-        </li>
+        <li>会場内に参加者・保護者向けの室内休憩所をご用意しております。ご利用の際は、体や衣服の水分を十分に拭き取ってからご利用ください。</li>
 
-        <li>ゲーム競技以外での、学校内敷地でで水鉄砲を人に向けて発射することは禁止です。</li>
+        <li>指定された競技エリア以外で、人に向けて水鉄砲を発射することは禁止です。</li>
 
         <li>会場内で発生したゴミは、各自でお持ち帰りいただきますようご協力をお願いいたします。</li>
 
-        <li>写真・動画撮影は可能ですが、他の参加者のプライバシーに十分ご配慮ください。撮影した写真・動画をSNS等へ投稿する際は、他の参加者が特定されないようご注意をお願いいたします。</li>
+        <li>写真・動画撮影は可能ですが、他の参加者のプライバシーに十分ご配慮ください。撮影した写真・動画をSNS等へ投稿する際は、
+          他の参加者が特定されないようご注意をお願いいたします。</li>
 
         <li>外遊び推進の啓発を目的として写真・動画撮影を行い、世田谷区および協賛企業の広報活動に使用させていただく場合があります。</li>
 
         <li>万一のケガや事故に備え、参加者を対象としたイベント保険（行事保険）に加入して運営いたします。</li>
 
-        <li>特命チーム「未来創造局」のメンバー（小学6年生を中心とする有志の児童）と大人たちが協力して企画した手作りイベントです。安全管理上必要な場合を除き、イベント内容は予告なく変更となる場合があります。</li>
+        <li>特命チーム「未来創造局」のメンバー（小学6年生を中心とする有志の児童）と大人たちが協力して企画した手作りイベントです。安全な運営のため、イベント内容は予告なく変更となる場合があります。</li>
       </ul>
 
       <p class="subsidy-note reveal" syle="color:var(--white);"> ※ この活動は、令和8年度 世田谷区外遊び普及啓発事業の補助を受けています。</p>
@@ -1198,8 +1216,8 @@ l202 -1 3 -97z" />
       <a href="#splash">スプラッシュバトル</a>
       <a href="#tasuke">タスケ</a>
       <a href="#minigame">ナイトプール・ミニゲーム</a>
-      <a href="#cautions">持参する持ち物</a>
-      <a href="#overall-cautions">来校の注意事項</a>
+      <a href="#cautions">持ち物</a>
+      <a href="#overall-cautions">参加登録・来校の注意事項</a>
     </nav>
 
     <div class="footer-contact" id="entry">
@@ -1210,19 +1228,22 @@ l202 -1 3 -97z" />
         </div>
         <div class="footer-contact-info">
           <h3 class="footer-contact-title">参加・お問い合わせ</h3>
-          <a href="https://example.com/entry" class="footer-entry-link" target="_blank" rel="noopener">
+          <a href="https://forms.gle/3pmU99pNgXnz1tKAA" class="footer-entry-link" target="_blank" rel="noopener">
             <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
               stroke-linecap="round" stroke-linejoin="round">
               <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
               <polyline points="15 3 21 3 21 9" />
               <line x1="10" y1="14" x2="21" y2="3" />
             </svg>
-            イベント参加登録フォーム
+            イベント参加登録フォームテスト用
           </a>
 
           <div class="footer-email-area">
             <span class="footer-email-label">メールでのお問い合わせ</span>
-            <a href="mailto:tamon.kodomo.events@gmail.com" class="footer-email">tamon.kodomo.events@gmail.com</a>
+            <a href="mailto:tamon.kodomo.events@gmail.com?subject=【2026 SUMMER EVENT 多聞ウォータースプラッシュ】お問い合わせ"
+              class="footer-email">
+              tamon.kodomo.events@gmail.com
+            </a>
           </div>
         </div>
         <p><Small>※事前登録は必須ではありませんが、参加人数の把握のため、参加予定の方は事前登録にご協力をお願いいたします。</Small></p>
