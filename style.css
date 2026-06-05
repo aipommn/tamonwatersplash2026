@@ -1877,3 +1877,103 @@ ol {
     align-items: center;
   }
 }
+
+
+/* ── 開催状況ネオンバッジ ── */
+/* ── 開催状況ネオンバッジ ── */
+#event-status[data-status="hidden"] .neon-badge {
+  display: none;
+}
+
+#event-status[data-status="go"] .neon-go {
+  display: inline-flex;
+}
+
+#event-status[data-status="go"] .neon-delay {
+  display: none;
+}
+
+#event-status[data-status="delay"] .neon-delay {
+  display: inline-flex;
+}
+
+#event-status[data-status="delay"] .neon-go {
+  display: none;
+}
+
+.neon-badge {
+  display: none;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 24px;
+}
+
+/* 決行 — シアン */
+.neon-go {
+  border: 2px solid #00C8FF;
+  background: rgba(0, 200, 255, 0.06);
+  box-shadow: 0 0 6px rgba(0, 200, 255, 0.6),
+    0 0 20px rgba(0, 200, 255, 0.2);
+}
+
+.neon-go .neon-dot {
+  background: #00C8FF;
+  box-shadow: 0 0 4px #00C8FF, 0 0 12px #00C8FF;
+}
+
+.neon-go .neon-word {
+  color: #00C8FF;
+  text-shadow: 0 0 4px rgba(255, 60, 160, 0.5);
+}
+
+.neon-go .neon-sub {
+  color: rgba(0, 200, 255, 0.7);
+}
+
+/* 順延 — ピンク */
+.neon-delay {
+  border: 2px solid var(--neon-pink);
+  background: rgba(255, 60, 160, 0.06);
+  box-shadow: 0 0 4px rgba(255, 60, 160, 0.6),
+    0 0 20px rgba(255, 60, 160, 0.2);
+}
+
+.neon-delay .neon-dot {
+  background: var(--neon-pink);
+  box-shadow: 0 0 4px #FF3CA0, 0 0 12px var(--neon-pink);
+}
+
+.neon-delay .neon-word {
+  color: var(--neon-pink);
+  text-shadow: 0 0 4px rgba(255, 60, 160, 0.5);
+}
+
+.neon-delay .neon-sub {
+  color: rgba(255, 60, 160, 0.75);
+}
+
+/* 共通 */
+.neon-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.neon-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.neon-word {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  line-height: 1;
+}
+
+.neon-sub {
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  margin-top: 3px;
+}
