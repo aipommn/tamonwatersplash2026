@@ -12,7 +12,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=5">
   <link rel="icon" type="image/x-icon" href="/tamonwatersplash2026/favicon.ico">
   <link rel="icon" type="image/svg+xml" href="/tamonwatersplash2026/favicon.svg">
 </head>
@@ -22,10 +22,11 @@
   <!-- ===================== MOBILE NAV ===================== -->
   <nav class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="ナビゲーション">
     <button class="mobile-nav-close" id="navClose" aria-label="閉じる">&#10005;</button>
-    <a href="#activities" data-color="splash" onclick="closeNav()">アクティビティ</a>
+    <a href="#activities" data-color="splash" onclick="closeNav()">コーナーについて</a>
     <a href="#splash" data-color="splash" onclick="closeNav()">スプラッシュバトル</a>
     <a href="#tasuke" data-color="tasuke" onclick="closeNav()">タスケ</a>
-    <a href="#minigame" data-color="mini" onclick="closeNav()">ナイトプール・ミニゲーム</a>
+    <a href="#night" data-color="mini" onclick="closeNav()">ナイトプール</a>
+    <a href="#free" data-color="mini" onclick="closeNav()">アソビバ</a>
     <a href="#cautions" data-color="caution" onclick="closeNav()">持ち物</a>
     <a href="#overall-cautions" data-color="caution" onclick="closeNav()">注意・同意事項</a>
     <a href="#contact" data-color="contact" onclick="closeNav()">参加・お問い合わせ</a>
@@ -250,11 +251,12 @@ l202 -1 3 -97z" />
     </a>
     <nav aria-label="メインナビゲーション">
       <ul class="header-nav">
-        <li><a href="#activities">アクティビティ</a></li>
+        <li><a href="#activities">コーナーについて</a></li>
         <li><a href="#splash" data-color="splash">スプラッシュバトル</a></li>
         <li><a href="#tasuke" data-color="tasuke">タスケ</a></li>
-        <li><a href="#minigame" data-color="mini">ナイトプール・ミニゲーム</a></li>
-        <li><a href="#cautions" data-color="caution" onclick="closeNav()">持ち物</a></li>
+        <li><a href="#night" data-color="mini">ナイトプール</a></li>
+        <li><a href="#free" data-color="mini">アソビバ</a></li>
+        <li><a href="#cautions" data-color="caution">持ち物</a></li>
         <li><a href="#overall-cautions" data-color="caution">注意・同意事項</a></li>
         <li><a href="#contact" data-color="contact">参加・お問い合わせ</a></li>
       </ul>
@@ -651,12 +653,19 @@ l202 -1 3 -97z" />
             </svg>
             タスケ
           </a>
-          <a href="#minigame" class="hero-game-tag mini" role="listitem">
+          <a href="#night" class="hero-game-tag mini" role="listitem">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <polygon
                 points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
             </svg>
-            ナイトプール・ミニゲーム
+            ナイトプール
+          </a>
+          <a href="#free" class="hero-game-tag splash" role="listitem">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z" />
+              <path d="M7 13s.5 1 2.5 1 3.5-2 5.5-2 2.5 1 2.5 1" />
+            </svg>
+            アソビバ
           </a>
         </div>
 
@@ -689,20 +698,23 @@ l202 -1 3 -97z" />
   <section class="section activities" id="activities" aria-labelledby="actTitle">
     <div class="section-inner">
       <p class="sec-eyebrow reveal">ACTIVITIES</p>
-      <h2 class="sec-title reveal" id="actTitle">3つの<span style="color:var(--c-mini);">アクティビティ</span></h2>
+      <h2 class="sec-title reveal" id="actTitle"><span style="color:var(--c-mini);">コーナー</span>について</h2>
       <p class="sec-lead reveal">
         今年のイベントは3つのコーナーを用意しています。
-        各アクティビティには専用のルールがあります。参加前にご確認ください。
+        待ち時間の発生するコーナーは専用のルールがあります。参加前にご確認ください。
       </p>
 
       <ul class="act-grid">
         <li class="act-card reveal" data-game="splash">
           <span class="act-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round">
-              <path d="M12 2c0 5-4 8-4 12a4 4 0 0 0 8 0c0-4-4-7-4-12z" />
-              <path d="M6 14c-1.5 0-3 1-3 3s1.5 3 3 3" />
-              <path d="M18 14c1.5 0 3 1 3 3s-1.5 3-3 3" />
+              <rect x="3" y="8" width="9" height="7" rx="1"></rect>
+              <path d="M7 15v5"></path>
+              <path d="M12 11h7"></path>
+              <path d="M19 10v2"></path>
+              <path d="M19 11h2"></path>
+              <circle cx="22" cy="11" r="1"></circle>
             </svg>
           </span>
           <span class="act-num">GAME 01</span>
@@ -738,10 +750,27 @@ l202 -1 3 -97z" />
             </svg>
           </span>
           <span class="act-num">GAME 03</span>
-          <h3 class="act-name">ナイトプール・ミニゲーム</h3>
+          <h3 class="act-name">ナイトプール</h3>
           <p class="act-desc">光と水の特別エリア！<br>
             ライトやサイリウムで彩られたナイトプール風エリア。冷たい足湯でひと休みしたり、水風船や的当てなどのミニゲームを楽しめます</p>
-          <a href="#minigame" class="act-link">詳しく見る →</a>
+          <a href="#night" class="act-link">詳しく見る →</a>
+        </li>
+
+        <li class="act-card reveal" data-game="mini" style="transition-delay:0.2s;">
+          <span class="act-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M12 2c0 5-4 8-4 12a4 4 0 0 0 8 0c0-4-4-7-4-12z" />
+              <path d="M6 14c-1.5 0-3 1-3 3s1.5 3 3 3" />
+              <path d="M18 14c1.5 0 3 1 3 3s-1.5 3-3 3" />
+            </svg>
+          </span>
+          <span class="act-num">free area</span>
+          <h3 class="act-name">ASOBIBA（フリーエリア）</h3>
+          <p class="act-desc">自由に遊べる水あそびゾーン！<br>
+            待ち時間や小さなお子さまも楽しめる、のんびり＆わいわい自由エリア
+          </p>
+          <a href="#free" class="act-link">詳しく見る →</a>
         </li>
       </ul>
     </div>
@@ -853,12 +882,11 @@ l202 -1 3 -97z" />
         <li class="rule-card reveal" style="transition-delay:0.16s">
           <span class="rule-tag">RULE 03</span>
           <div class="r-num" aria-hidden="true">03</div>
-          <h3>攻めるか、守るか</h3>
+          <h3>待ち時間もミッション</h3>
           <p>
-            コート内にはダンボール製のシールドも配置。<br>
-            攻め続けるか、守備に回って仲間を支えるかはチーム次第。<br>
-            どのポイントを狙う？ 誰が守る？<br>
-            勝利のカギは仲間との連携だ！
+            並んでいる時間は「タスケゲームのサポート＆準備タイム」。<br>
+            タスケでは妨害役として盛り上げに参加したり、スプラッシュバトルでは次の試合準備をお手伝い。<br>
+            長い待ち時間はASOBIBAで自由に水あそびや練習もOK！
           </p>
         </li>
       </ul>
@@ -1000,24 +1028,67 @@ l202 -1 3 -97z" />
 
   <div class="cut rev" aria-hidden="true"></div>
 
-  <!-- ===================== GAME 03: ナイトプール・ミニゲーム ===================== -->
-  <section class="game-section section" id="minigame" aria-labelledby="miniTitle">
+  <!-- ===================== GAME 03: ナイトプール ===================== -->
+  <section class="game-section section" id="night" aria-labelledby="miniTitle">
     <div class="bg-num" aria-hidden="true">03</div>
     <div class="section-inner">
       <p class="sec-eyebrow reveal" style="color:var(--c-mini);">GAME 03</p>
-      <h2 class="sec-title reveal" id="miniTitle">ナイトプール<br><span style="font-size:0.55em; color:var(--muted);">&
-          ミニゲーム</span></h2>
+      <h2 class="sec-title reveal" id="miniTitle">ナイトプール</h2>
       <p class="sec-lead reveal">
         ナイトプール風の足湯アイスバスでリラックス！<br>
-        そのほか、水風船や的当てなど、未就学児のお子さまから大人まで楽しめるミニゲームをたくさんご用意しています。
+        水に触れながらゆったり過ごせるくつろぎエリアです。未就学児のお子さまから大人まで、それぞれのペースで水あそびや休憩を楽しめます。<br>
+        また、足元が滑りやすい場合がありますのでご注意ください。タオルのご準備をおすすめいたします。
       </p>
 
-      <div class="media-slot reveal" style="--accent: var(--c-mini);" role="img" aria-label="ナイトプール・ミニゲーム 画像">
-        <p class="media-slot-label">IMAGE / VIDEO<br>（ナイトプール・ミニゲームの画像をここに配置）</p>
+      <div class="media-slot reveal" style="--accent: var(--c-mini);" role="img" aria-label="ナイトプール 画像">
+        <p class="media-slot-label">IMAGE / VIDEO<br>（ナイトプールの画像をここに配置）</p>
       </div>
 
       <!--h3 class="reveal"
         style="font-size:clamp(1rem,3vw,1.1rem); font-weight:700; margin-bottom:0.75rem; color:var(--text);">参加前の準備</h3-->
+
+      <!--h3 class="reveal"
+        style="font-size:clamp(1rem,3vw,1.1rem); font-weight:700; margin:2.5rem 0 0.75rem; color:var(--text);">参加のルール
+      </h3-->
+      <!--div class="rule-img-slot reveal">
+        <img src="https://placehold.co/900x400/0D1A2F/FFD600?text=RULE+IMAGE" alt="ナイトプール ルール画像">
+      </div-->
+
+      <div class="activity-caution reveal">
+        <div class="activity-caution-header">
+          <svg class="warn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+            <line x1="12" y1="9" x2="12" y2="13" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+          </svg>
+          <h3>ナイトプール 注意事項</h3>
+        </div>
+        <ul class="activity-caution-list">
+          <li>未就学児の方もご参加いただけます。必ず保護者の方の見守りをお願いいたします。安全のため、濡れやすい環境となります。</li>
+          <li>混雑時は順番を守り、譲り合ってご利用ください。</li>
+          <li>ナイトプールエリアは照明を使用した演出を行います。足元に注意してお楽しみください。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <div class="cut" aria-hidden="true"></div>
+  <!-- ===================== GAME 04: asobiba ===================== -->
+  <section class="game-section section" id="free" aria-labelledby="miniTitle">
+    <div class="bg-num" aria-hidden="true">03</div>
+    <div class="section-inner">
+      <p class="sec-eyebrow reveal" style="color:var(--c-mini);">FREE AREA</p>
+      <h2 class="sec-title reveal" id="miniTitle">アソビバ</h2>
+      <p class="sec-lead reveal">
+        自由に遊べる水あそびゾーン！<br>
+        待ち時間や小さなお子さまも楽しめる、のんびり＆わいわい自由エリアです。水鉄砲や的当てなどを使って、自分のペースで遊べます。<br>
+        未就学児も安心して参加できるよう、やさしい水あそびスペースも設置しています。
+      </p>
+
+      <div class="media-slot reveal" style="--accent: var(--c-mini);" role="img" aria-label="ナイトプール 画像">
+        <p class="media-slot-label">IMAGE / VIDEO<br>（アソビバの画像をここに配置）</p>
+      </div>
+
       <ul class="prep-list reveal">
 
         <li class="prep-item">
@@ -1040,13 +1111,13 @@ l202 -1 3 -97z" />
           <span class="prep-item-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
               stroke-linejoin="round">
-              <polygon
-                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+              <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"></path>
+              <path d="M7 13s.5 1 2.5 1 3.5-2 5.5-2 2.5 1 2.5 1"></path>
             </svg>
           </span>
           <div class="prep-item-body">
-            <h4>ゆずり合ってご利用ください</h4>
-            <p>ナイトプールエリアやミニゲームは自由にご利用いただけます。混雑時は順番を守り、譲り合ってお楽しみください。</p>
+            <h4>汚れてもいい服装</h4>
+            <p>汚れてもよい服装でご参加ください。</p>
           </div>
         </li>
       </ul>
@@ -1055,28 +1126,8 @@ l202 -1 3 -97z" />
         style="font-size:clamp(1rem,3vw,1.1rem); font-weight:700; margin:2.5rem 0 0.75rem; color:var(--text);">参加のルール
       </h3-->
       <!--div class="rule-img-slot reveal">
-        <img src="https://placehold.co/900x400/0D1A2F/FFD600?text=RULE+IMAGE" alt="ナイトプール・ミニゲーム ルール画像">
+        <img src="https://placehold.co/900x400/0D1A2F/FFD600?text=RULE+IMAGE" alt="ナイトプール ルール画像">
       </div-->
-      <ul class="rules-grid">
-        <li class="rule-card reveal">
-          <span class="rule-tag">RULE 01</span>
-          <div class="r-num" aria-hidden="true">01</div>
-          <h3>順番を守って参加する</h3>
-          <p>順番待ちの列がある場合は、必ず並んでお待ちください。割り込みは禁止です。</p>
-        </li>
-        <li class="rule-card reveal" style="transition-delay:0.08s">
-          <span class="rule-tag">RULE 02</span>
-          <div class="r-num" aria-hidden="true">02</div>
-          <h3>道具を大切に扱う</h3>
-          <p>ゲームで使用する道具は丁寧に扱ってください。故意に破損させた場合は弁償をお願いする場合があります。</p>
-        </li>
-        <li class="rule-card reveal" style="transition-delay:0.16s">
-          <span class="rule-tag">RULE 03</span>
-          <div class="r-num" aria-hidden="true">03</div>
-          <h3>混雑時のご案内</h3>
-          <p>混雑状況により、一部コーナーでは利用時間や入場人数を制限する場合があります。スタッフの案内にご協力をお願いいたします。</p>
-        </li>
-      </ul>
 
       <div class="activity-caution reveal">
         <div class="activity-caution-header">
@@ -1086,12 +1137,11 @@ l202 -1 3 -97z" />
             <line x1="12" y1="9" x2="12" y2="13" />
             <line x1="12" y1="17" x2="12.01" y2="17" />
           </svg>
-          <h3>ナイトプール・ミニゲーム 注意事項</h3>
+          <h3>アソビバ 注意事項</h3>
         </div>
         <ul class="activity-caution-list">
-          <li>未就学児の方もご参加いただけます。必ず保護者同伴でご利用ください。</li>
+          <li>安全エリアゾーンでは水鉄砲の撃ち合いなど禁止します。スタッフの指示に従ってください</li>
           <li>混雑時は順番を守り、譲り合ってご利用ください。</li>
-          <li>ナイトプールエリアは照明を使用した演出を行います。足元に注意してお楽しみください。</li>
         </ul>
       </div>
     </div>
@@ -1223,19 +1273,20 @@ l202 -1 3 -97z" />
 
   <!-- ===================== FOOTER ===================== -->
   <footer class="site-footer" role="contentinfo" id="contact">
-    <div class="footer-logo">TAMON WATER SPLASH 2026</div>
+    <div class="footer-logo">TAMON WATER SPLASH</div>
     <div class="footer-games" aria-label="アクティビティ一覧">
       <span class="s">スプラッシュバトル</span>
       <span class="t">タスケ</span>
-      <span class="m">ナイトプール・ミニゲーム</span>
+      <span class="m">ナイトプール</span>
     </div>
     <nav class="footer-nav" aria-label="フッターナビゲーション">
       <a href="#activities">アクティビティ</a>
       <a href="#splash">スプラッシュバトル</a>
       <a href="#tasuke">タスケ</a>
-      <a href="#minigame">ナイトプール・ミニゲーム</a>
-      <a href="#cautions">持ち物</a>
-      <a href="#overall-cautions">注意・同意事項</a>
+      <a href="#night">ナイトプール</a>
+      <a href="#free">アソビバ
+        <a href="#cautions">持ち物</a>
+        <a href="#overall-cautions">注意・同意事項</a>
     </nav>
 
     <div class="footer-contact" id="entry">
